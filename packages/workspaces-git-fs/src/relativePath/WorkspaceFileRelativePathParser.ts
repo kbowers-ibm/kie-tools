@@ -15,6 +15,20 @@
  */
 
 import { basename, extname, parse } from "path";
+import {
+  FileTypes,
+  isDashbuilderYaml,
+  isDashbuilderYml,
+  isDecision,
+  isScorecard,
+  isServerlessDecisionJson,
+  isServerlessDecisionYaml,
+  isServerlessDecisionYml,
+  isServerlessWorkflowJson,
+  isServerlessWorkflowYaml,
+  isServerlessWorkflowYml,
+  isWorkflow,
+} from "../constants/ExtensionHelper";
 
 export function parseWorkspaceFileRelativePath(relativePath: string) {
   const extension = extractExtension(relativePath);
@@ -28,18 +42,48 @@ export function parseWorkspaceFileRelativePath(relativePath: string) {
 }
 
 export function extractExtension(relativePath: string) {
-  const fileName = basename(relativePath);
-  if (fileName.startsWith(".")) {
-    return fileName.slice(1);
+  const fileName = basename(relativePath).toLowerCase();
+  if (fileName.includes(".")) {
+    let extensionFinder = 0;
+    switch (true) {
+      case isServerlessWorkflowJson(fileName):
+        extensionFinder = fileName.lastIndexOf(FileTypes.SW_JSON);
+        return fileName.substring(extensionFinder);
+      case isServerlessWorkflowYml(fileName):
+        extensionFinder = fileName.lastIndexOf(FileTypes.SW_YML);
+        return fileName.substring(extensionFinder);
+      case isServerlessWorkflowYaml(fileName):
+        extensionFinder = fileName.lastIndexOf(FileTypes.SW_YAML);
+        return fileName.substring(extensionFinder);
+      case isServerlessDecisionJson(fileName):
+        extensionFinder = fileName.lastIndexOf(FileTypes.YARD_JSON);
+        return fileName.substring(extensionFinder);
+      case isServerlessDecisionYml(fileName):
+        extensionFinder = fileName.lastIndexOf(FileTypes.YARD_YML);
+        return fileName.substring(extensionFinder);
+      case isServerlessDecisionYaml(fileName):
+        extensionFinder = fileName.lastIndexOf(FileTypes.YARD_YAML);
+        return fileName.substring(extensionFinder);
+      case isDashbuilderYml(fileName):
+        extensionFinder = fileName.lastIndexOf(FileTypes.DASH_YML);
+        return fileName.substring(extensionFinder);
+      case isDashbuilderYaml(fileName):
+        extensionFinder = fileName.lastIndexOf(FileTypes.DASH_YAML);
+        return fileName.substring(extensionFinder);
+      case isDecision(fileName):
+        extensionFinder = fileName.lastIndexOf(FileTypes.DMN);
+        return fileName.substring(extensionFinder);
+      case isWorkflow(fileName):
+        extensionFinder = fileName.lastIndexOf(FileTypes.BPMN);
+        return fileName.substring(extensionFinder);
+      case isScorecard(fileName):
+        extensionFinder = fileName.lastIndexOf(FileTypes.PMML);
+        return fileName.substring(extensionFinder);
+      default:
+        extensionFinder = fileName.lastIndexOf(".");
+        return fileName.substring(extensionFinder + 1);
+    }
+  } else {
+    return extname(relativePath);
   }
-
-  const matchDots = fileName.match(/\./g);
-  if (matchDots && matchDots.length > 1) {
-    return fileName
-      .split(/\.(.*)/s)
-      .slice(1)
-      .join("");
-  }
-
-  return extname(relativePath).replace(".", "");
 }

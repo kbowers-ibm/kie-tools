@@ -26,7 +26,6 @@ export type SupportedFileExtensions = "bpmn" | "bpmn2" | "BPMN" | "BPMN2" | "dmn
 export const EditorEnvelopeLocatorContext = React.createContext<EditorEnvelopeLocator>({} as any);
 
 export function EditorEnvelopeLocatorContextProvider(props: { children: React.ReactNode }) {
-  console.log("Herro");
   const value = new EditorEnvelopeLocatorFactory().create({
     targetOrigin: window.location.origin,
   });

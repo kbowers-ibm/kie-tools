@@ -39,7 +39,6 @@ import { GlobalAlertsContextProvider } from "./alerts";
 import { WorkspacesContextProviderWithCustomCommitMessagesModal } from "./workspace/components/WorkspacesContextProviderWithCustomCommitMessagesModal";
 
 export function App() {
-  console.log("here?");
   return (
     <HashRouter>
       {nest(

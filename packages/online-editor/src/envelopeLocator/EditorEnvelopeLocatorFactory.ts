@@ -19,8 +19,7 @@ import {
   EnvelopeContentType,
   EnvelopeMapping,
 } from "@kie-tools-core/editor/dist/api/EditorEnvelopeLocator";
-import { useEnv } from "../env/hooks/EnvContext";
-
+import { getEnvelopeEditors } from "./hooks/EditorEnvelopeLocatorContext";
 import { FileTypes, isOfKind } from "@kie-tools-core/workspaces-git-fs/dist/constants/ExtensionHelper";
 
 export const GLOB_PATTERN = {
@@ -39,6 +38,8 @@ export const supportedFileExtensionArray = [
   FileTypes.PMML,
 ];
 
+const editors = getEnvelopeEditors();
+
 export type SupportedFileExtensions = typeof supportedFileExtensionArray[number];
 
 export function isModel(path: string): boolean {
@@ -51,10 +52,10 @@ export function isEditable(path: string): boolean {
 
 export class EditorEnvelopeLocatorFactory {
   public create(args: { targetOrigin: string }) {
-    const { env } = useEnv();
+    console.log("DOES IT REACH?");
     return new EditorEnvelopeLocator(
       args.targetOrigin,
-      env.KIE_SANDBOX_ENVELOPE_LOCATOR.map((config) => {
+      editors.map((config) => {
         return new EnvelopeMapping({
           type: config.type,
           filePathGlob: config.filePathGlob,

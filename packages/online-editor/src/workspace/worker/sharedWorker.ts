@@ -31,6 +31,7 @@ async function gitCorsProxyUrl(): Promise<string> {
 }
 
 const editorEnvelopeLocator = new EditorEnvelopeLocatorFactory().create({ targetOrigin: "" });
+console.log("THIS IS: " + editorEnvelopeLocator);
 const workspaceServices = createWorkspaceServices({ gitCorsProxyUrl: gitCorsProxyUrl() });
 
 // shared worker connection
@@ -39,18 +40,19 @@ declare let onconnect: any;
 // eslint-disable-next-line prefer-const
 onconnect = async (e: MessageEvent) => {
   console.log("Connected to Workspaces Shared Worker");
-
-  setupWorkerConnection({
-    fsFlushManager: workspaceServices.fsFlushManager,
-    apiImpl: new WorkspacesWorkerApiImpl({
-      appName: "KIE Sandbox",
-      services: workspaceServices,
-      fileFilter: {
-        isModel: (path) => editorEnvelopeLocator.hasMappingFor(path),
-        isEditable: (path) => editorEnvelopeLocator.hasMappingFor(path),
-        isSupported: (path) => editorEnvelopeLocator.hasMappingFor(path),
-      },
-    }),
-    port: e.ports[0],
-  });
+  if (editorEnvelopeLocator) {
+    setupWorkerConnection({
+      fsFlushManager: workspaceServices.fsFlushManager,
+      apiImpl: new WorkspacesWorkerApiImpl({
+        appName: "KIE Sandbox",
+        services: workspaceServices,
+        fileFilter: {
+          isModel: (path) => editorEnvelopeLocator.hasMappingFor(path),
+          isEditable: (path) => editorEnvelopeLocator.hasMappingFor(path),
+          isSupported: (path) => editorEnvelopeLocator.hasMappingFor(path),
+        },
+      }),
+      port: e.ports[0],
+    });
+  }
 };

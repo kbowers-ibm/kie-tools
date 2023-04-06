@@ -24,15 +24,15 @@ export type SupportedFileExtensions = "bpmn" | "bpmn2" | "BPMN" | "BPMN2" | "dmn
 export const EditorEnvelopeLocatorContext = React.createContext<EditorEnvelopeLocator>({} as any);
 
 export function EditorEnvelopeLocatorContextProvider(props: { children: React.ReactNode }) {
-  const value = useMemo(
-    () =>
-      new EditorEnvelopeLocatorFactory().create({
-        targetOrigin: window.location.origin,
-      }),
-    []
-  );
+  const value = new EditorEnvelopeLocatorFactory().create({
+    targetOrigin: window.location.origin,
+  });
 
-  return <EditorEnvelopeLocatorContext.Provider value={value}>{props.children}</EditorEnvelopeLocatorContext.Provider>;
+  if (value) {
+    return (
+      <EditorEnvelopeLocatorContext.Provider value={value}>{props.children}</EditorEnvelopeLocatorContext.Provider>
+    );
+  }
 }
 
 export function useEditorEnvelopeLocator() {

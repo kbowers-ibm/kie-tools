@@ -27,6 +27,7 @@ async function main() {
   if (await incompatibleBrowser.isTrue()) {
     ReactDOM.render(<incompatibleBrowser.Component />, appContainer);
   } else {
+    console.log("lezzgo");
     ReactDOM.render(<App />, appContainer);
   }
 }

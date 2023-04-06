@@ -248,7 +248,7 @@ By default all editors will be enabled. To disable an editor simply delete/comme
 - **path**: Populates the envelopeContent.
 - **title**: The title that will show up on the home page.
 - **extension**: The extension of the file type that you want to edit.
-- **description**: Will display a short description under the title on the home page.
+- **description**: An optional parameter that will display a short description under the title on the home page.
 
 Here's an example of what it should look like:
 

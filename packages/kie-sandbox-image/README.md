@@ -237,5 +237,3 @@ Here's an example of what it should look like:
     otherFilesDestinationFolder: "src/main/resources/others",
 }
 ```
-
-### Editors

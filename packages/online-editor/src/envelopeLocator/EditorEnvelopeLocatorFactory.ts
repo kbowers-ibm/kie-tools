@@ -52,7 +52,6 @@ export function isEditable(path: string): boolean {
 
 export class EditorEnvelopeLocatorFactory {
   public create(args: { targetOrigin: string }) {
-    console.log("DOES IT REACH?");
     return new EditorEnvelopeLocator(
       args.targetOrigin,
       editors.map((config) => {

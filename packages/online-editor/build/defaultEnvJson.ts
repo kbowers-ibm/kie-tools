@@ -40,7 +40,7 @@ export const defaultEnvJson: EnvJson = {
       supportedGitRemoteDomains: ["github.com", "gist.github.com"],
       type: AuthProviderType.github,
       name: "GitHub",
-      enabled: false,
+      enabled: true,
       iconPath: "",
       group: AuthProviderGroup.GIT,
     },

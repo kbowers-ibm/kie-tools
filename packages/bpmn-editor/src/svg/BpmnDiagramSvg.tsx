@@ -320,7 +320,7 @@ export function BpmnDiagramSvg({
     });
 
     return { nodesSvg, nodesById };
-  }, [sortedNodesByParent]);
+  }, [customTasks, sortedNodesByParent]);
 
   return (
     <>

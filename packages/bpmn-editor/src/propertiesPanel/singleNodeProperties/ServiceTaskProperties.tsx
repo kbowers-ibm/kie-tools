@@ -44,6 +44,7 @@ import { TextInput } from "@patternfly/react-core/dist/js/components/TextInput";
 import { useBpmnEditorI18n } from "../../i18n";
 import { addOrGetInterfaces } from "../../mutations/addOrGetInterfaces";
 import { addOrGetOperations } from "../../mutations/addOrGetOperations";
+import { generateUuid } from "@kie-tools/xyflow-react-kie-diagram/dist/uuid/uuid";
 
 export function ServiceTaskProperties({
   serviceTask,
@@ -164,6 +165,7 @@ export function ServiceTaskProperties({
                       id: e["@_id"],
                     });
                     e["@_drools:serviceoperation"] = newOperation;
+                    e["@_operationRef"] ??= generateUuid();
                   }
                 });
               })

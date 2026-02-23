@@ -52,6 +52,7 @@ export function addOrGetOperations({
       "@_id": id,
       "@_name": operationName,
       inMessageRef: { __$$text: id },
+      outMessageRef: { __$$text: id },
     };
     serviceTaskInterface.operation.push(operation);
   } else if (operation["@_name"] !== operationName) {

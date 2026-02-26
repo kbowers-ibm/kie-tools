@@ -164,7 +164,7 @@ export function ServiceTaskProperties({
                       id: e["@_id"],
                     });
                     e["@_drools:serviceoperation"] = newOperation;
-                    e["@_operationRef"] ??= e["@_id"];
+                    e["@_operationRef"] ??= `${e["@_id"]}_ServiceOperation`;
                   }
                 });
               })

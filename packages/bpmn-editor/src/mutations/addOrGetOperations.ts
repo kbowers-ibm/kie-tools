@@ -22,6 +22,7 @@ import { ElementFilter } from "@kie-tools/xml-parser-ts/dist/elementFilter";
 import { Unpacked } from "@kie-tools/xyflow-react-kie-diagram/dist/tsExt/tsExt";
 import { Normalized } from "../normalization/normalize";
 import { addOrGetInterfaces } from "./addOrGetInterfaces";
+import { addOrGetMessages } from "./addOrGetMessages";
 
 export function addOrGetOperations({
   definitions,
@@ -45,16 +46,28 @@ export function addOrGetOperations({
 
   serviceTaskInterface.operation ??= [];
 
-  let operation = serviceTaskInterface.operation.find((s) => s["@_id"] === id);
+  const operationId = `${id}_ServiceOperation`;
+  let operation = serviceTaskInterface.operation.find((s) => s["@_id"] === operationId);
 
   if (!operation) {
+    const inMessageId = `${id}_InMessage`;
+    const outMessageId = `${id}_OutMessage`;
+
     operation = {
-      "@_id": id,
+      "@_id": operationId,
       "@_name": operationName,
-      inMessageRef: { __$$text: id },
-      outMessageRef: { __$$text: id },
+      inMessageRef: { __$$text: inMessageId },
+      outMessageRef: { __$$text: outMessageId },
     };
     serviceTaskInterface.operation.push(operation);
+    addOrGetMessages({
+      definitions,
+      id: inMessageId,
+    });
+    addOrGetMessages({
+      definitions,
+      id: outMessageId,
+    });
   } else if (operation["@_name"] !== operationName) {
     operation["@_name"] = operationName;
   }

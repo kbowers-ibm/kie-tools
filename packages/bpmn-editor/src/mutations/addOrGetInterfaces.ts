@@ -36,7 +36,8 @@ export function addOrGetInterfaces({
   definitions.rootElement ??= [];
   const interfaces = definitions.rootElement.filter((s) => s.__$$element === "interface");
 
-  const existingInterface = interfaces.find((s) => s["@_id"] === id);
+  const interfaceId = `${id}_ServiceInterface`;
+  const existingInterface = interfaces.find((s) => s["@_id"] === interfaceId);
   if (existingInterface) {
     if (existingInterface["@_name"] !== interfaceName) {
       existingInterface["@_name"] = interfaceName;
@@ -46,7 +47,7 @@ export function addOrGetInterfaces({
 
   const newInterface: ElementFilter<Unpacked<Normalized<BPMN20__tDefinitions["rootElement"]>>, "interface"> = {
     __$$element: "interface",
-    "@_id": id,
+    "@_id": interfaceId,
     "@_name": interfaceName,
     operation: [],
   };

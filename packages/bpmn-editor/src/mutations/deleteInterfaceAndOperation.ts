@@ -29,10 +29,19 @@ export function deleteInterfaceAndOperation({
   definitions: Normalized<BPMN20__tDefinitions>;
   serviceTaskId: string;
 }) {
-  const existingInterfaceIndex = definitions.rootElement?.findIndex(
-    (s) => s.__$$element === "interface" && s["@_id"] === serviceTaskId
-  );
+  const interfaceId = `${serviceTaskId}_ServiceInterface`;
+  const inMessageId = `${serviceTaskId}_InMessage`;
+  const outMessageId = `${serviceTaskId}_OutMessage`;
 
+  const existingInterfaceIndex = definitions.rootElement?.findIndex(
+    (s) => s.__$$element === "interface" && s["@_id"] === interfaceId
+  );
+  const existingInMessageIndex = definitions.rootElement?.findIndex(
+    (s) => s.__$$element === "message" && s["@_id"] === inMessageId
+  );
+  const existingOutMessageIndex = definitions.rootElement?.findIndex(
+    (s) => s.__$$element === "message" && s["@_id"] === outMessageId
+  );
   if (existingInterfaceIndex === undefined || existingInterfaceIndex < 0) {
     return;
   }
@@ -48,6 +57,11 @@ export function deleteInterfaceAndOperation({
   });
 
   if (!hasCorrespondingServiceTask) {
-    definitions.rootElement?.splice(existingInterfaceIndex, 1);
+    const indicesToDelete = [existingInterfaceIndex, existingInMessageIndex, existingOutMessageIndex]
+      .filter((index): index is number => index !== undefined && index >= 0)
+      .sort((a, b) => b - a);
+    for (const index of indicesToDelete) {
+      definitions.rootElement?.splice(index, 1);
+    }
   }
 }

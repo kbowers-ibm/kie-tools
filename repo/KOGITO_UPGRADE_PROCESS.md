@@ -25,7 +25,7 @@ The upgrade should be applied whenever you want to make `kie-tools` more closely
 
 # Upgrading Kogito
 
-To make sure you're upgrading Kogito to a version that is consistent across the many repositories which `kie-tools` depends on, the best way is to use a date as referece.
+To make sure you're upgrading Kogito to a version that is consistent, the best way is to use a date as reference.
 
 With the [GitHub CLI](https://cli.github.com/) installed, you can run:
 
@@ -33,12 +33,9 @@ With the [GitHub CLI](https://cli.github.com/) installed, you can run:
 
 DATE='2025-08-05' # CHANGE THIS TO WHATEVER DATE YOU'D LIKE TO UPGRADE TO.
 PAGER='cat'
-DROOLS_SHA=$(gh search commits --author-date "<${DATE}" -R "apache/incubator-kie-drools" --sort author-date --order desc --json sha --limit 1 --jq '.[].sha')
-OPTAPLANNER_SHA=$(gh search commits --author-date "<${DATE}" -R "apache/incubator-kie-optaplanner" --sort author-date --order desc --json sha --limit 1 --jq '.[].sha')
-KOGITO_RUNTIMES_SHA=$(gh search commits --author-date "<${DATE}" -R "apache/incubator-kie-kogito-runtimes" --sort author-date --order desc --json sha --limit 1 --jq '.[].sha')
-KOGITO_APPS_SHA=$(gh search commits --author-date "<${DATE}" -R "apache/incubator-kie-kogito-apps" --sort author-date --order desc --json sha --limit 1 --jq '.[].sha')
+DROOLS_SHA=$(gh search commits --author-date "<${DATE}" -R "apache/incubator-kie" --sort author-date --order desc --json sha --limit 1 --jq '.[].sha')
 VERSION=$(echo "${DATE//-/}")
-pnpm update-kogito-version-to --maven "999-${VERSION}-local" --droolsGitRef "${DROOLS_SHA}" --optaplannerGitRef "${OPTAPLANNER_SHA}" --kogitoRuntimesGitRef "${KOGITO_RUNTIMES_SHA}" --kogitoAppsGitRef "${KOGITO_APPS_SHA}"
+pnpm update-kogito-version-to --maven "999-${VERSION}-local" --droolsGitRef "${DROOLS_SHA}"
 ```
 
 Of course, a new Kogito version may lead to incompatibilities in the code and with other dependencies. In such a case, an investigation and evetually a fix is required to complete the process.

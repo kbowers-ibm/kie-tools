@@ -17,7 +17,7 @@
 
 ## DMN testing models
 
-This package is meant to contain all the DMN models published inside [kie-dmn-test-resources](https://github.com/apache/incubator-kie-drools/tree/main/kie-dmn/kie-dmn-test-resources) to make them available for testing purposes.
+This package is meant to contain all the DMN models published inside [kie-dmn-test-resources](https://github.com/apache/incubator-kie/tree/main/kie-dmn/kie-dmn-test-resources) to make them available for testing purposes.
 
 Models are separated between < 1.5 version and 1.5 version; such classification is based on actual version-specific features, and not on the referenced tag itself.
 

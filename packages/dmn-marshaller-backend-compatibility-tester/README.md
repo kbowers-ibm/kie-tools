@@ -22,7 +22,7 @@ The scripts are based on [JBang!](https://www.jbang.dev/) which provides an out-
 
 At the moment of writing, two scripts are available:
 
-- DMN Validation, which can validate a DMN file (and its imported DMN assets) using the [KIE DMN Validator](https://github.com/apache/incubator-kie-drools/tree/main/kie-dmn/kie-dmn-validation) back-end module.
+- DMN Validation, which can validate a DMN file (and its imported DMN assets) using the [KIE DMN Validator](https://github.com/apache/incubator-kie/tree/main/kie-dmn/kie-dmn-validation) back-end module.
 - DMN Semantic Comparison, which compares two DMN files (and their imported DMN assets) using a Backend logic that relies on KIE DMN Engine core code.
 
 Every script is defined in a single Java class. Inside those, you can find a list of fields (marked with `@Option` annotation) that represent the commands and their required parameters to run the scripts.

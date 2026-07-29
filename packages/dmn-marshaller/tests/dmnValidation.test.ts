@@ -28,7 +28,7 @@ import {
 
 /**
  * This test suite validates the xml produced (parsed and built) by the marshaller relying on KIE DMN Validator
- * (https://github.com/apache/incubator-kie-drools/tree/main/kie-dmn/kie-dmn-validation).
+ * (https://github.com/apache/incubator-kie/tree/main/kie-dmn/kie-dmn-validation).
  * A JBang script is used to actually call the KIE DMN Validator Java code.
  */
 

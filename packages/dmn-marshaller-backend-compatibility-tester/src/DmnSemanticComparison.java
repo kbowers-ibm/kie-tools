@@ -53,7 +53,7 @@ import org.kie.internal.io.ResourceFactory;
 /**
  * JBang script that performs DMN files' XML (in string format) validation
  * relying on KIE DMN Validator
- * (https://github.com/apache/incubator-kie-drools/tree/main/kie-dmn/kie-dmn-validation).
+ * (https://github.com/apache/incubator-kie/tree/main/kie-dmn/kie-dmn-validation).
  * The script can manage one or two (in case of imported model) DMN file paths.
  * The XSD SCHEMA, DMN COMPLIANCE and DMN COMPILATION are validated.
  */

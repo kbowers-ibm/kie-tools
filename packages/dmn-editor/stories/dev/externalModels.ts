@@ -170,7 +170,7 @@ export const sumDiffDs = `<definitions
 </dmndi:DMNDI>
 </definitions>
 `;
-// Copied from kogito-examples/kogito-quarkus-examples/dmn-pmml-quarkus-example/src/main/resources
+// Copied from kie-examples/kogito-quarkus-examples/dmn-pmml-quarkus-example/src/main/resources
 export const testTreePmml = `<PMML version="4.2" xsi:schemaLocation="http://www.dmg.org/PMML-4_2 http://www.dmg.org/v4-2-1/pmml-4-2.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xmlns="http://www.dmg.org/PMML-4_2">
 <Header>
